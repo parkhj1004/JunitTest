@@ -86,6 +86,51 @@ public class BasicTest {
 
     public static void main(String[] args) {
 
+        long startTime = 0;
+        long endTime = 0;
+
+//        String testString = new String("abc");
+        String testString ="abc";
+        StringBuilder stringBuilder = new StringBuilder("abc");
+//        MyStringBuilder myStringBuilder = new MyStringBuilder("abc");
+
+        startTime = System.nanoTime();
+        for (int i=0; i<10; i++) {
+            testString += "abc";
+
+            System.out.println(testString + " ::: " + testString.hashCode());
+        }
+        endTime = System.nanoTime();
+
+        System.out.println("String 실행 시간          : " + (endTime - startTime));
+
+        startTime = System.nanoTime();
+        for (int i=0; i<10; i++) {
+            testString = testString.concat("========");
+
+            System.out.println(testString + " ::: " + testString.hashCode());
+        }
+        endTime = System.nanoTime();
+
+        System.out.println("String 실행 시간          : " + (endTime - startTime));
+        startTime = System.nanoTime();
+        for (int i=0; i<10; i++) {
+            stringBuilder.append("abc");
+
+            System.out.println(stringBuilder+ " ::: " + stringBuilder.hashCode());
+        }
+        endTime = System.nanoTime();
+
+        System.out.println("StringBuilder 실행 시간   : " + (endTime - startTime));
+
+
+//        String testString = "";
+//        for(int i = 0; i < 10000; i++){
+//            testString += "|test|";
+//        }
+
+        System.out.println(testString);
+
         System.out.println( " <<<< >>> " + setIpLong("211.63.24.67"));
 
         String strTest ="aa";
