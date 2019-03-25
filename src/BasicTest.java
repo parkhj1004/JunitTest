@@ -84,7 +84,27 @@ public class BasicTest {
         return ipLong;
     }
 
+    static int factorial(int n) {
+
+//        int result = n;
+
+        System.out.println(n);
+
+
+        if (n > 1) {
+            System.out.println("n : " + n);
+            //System.out.println(n + "*" + factorial(n-1));
+            return  (n * factorial(n - 1));
+        } else {
+            System.out.println("nnn : " + n);
+            return n;
+        }
+    }
+
     public static void main(String[] args) {
+
+        System.out.println(factorial(4));
+
 
         long startTime = 0;
         long endTime = 0;

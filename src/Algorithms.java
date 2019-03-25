@@ -5,8 +5,66 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Algorithms {
+
+    @Test
+    public void binaryTest() {
+
+        int num = 35;
+
+        String temp = Integer.toBinaryString(num);
+
+        System.out.println(temp);
+
+        System.out.println(Stream.of(Integer.toBinaryString(num).replaceAll("0+$","").split("0+"))
+                .filter(a -> a != null)
+                .map(String::length)
+                .max(Integer::compare)
+                .orElse(0));
+
+
+
+
+
+    }
+
+
+    @Test
+    public void max() {
+
+        int input = 909;
+
+        String tmp = String.valueOf(input);
+        char check , check2;
+        char cInput[];
+
+        String tmpMax , tmpMin;
+
+        if(input > 0)
+        {
+            cInput = tmp.toCharArray();
+            check = cInput[0];
+            check2 = cInput[1];
+
+
+            switch (check) {
+                case '9' :
+                    tmpMax = tmp.replaceAll(String.valueOf(check2) , "9");
+                    break;
+                default :
+                    tmpMax = tmp.replaceAll(String.valueOf(check) , "9");
+                    break;
+            }
+
+            tmpMin = tmp.replaceAll(String.valueOf(check) , "1");
+
+            System.out.println(tmpMin + " , " + tmpMax);
+            System.out.println(Integer.valueOf(tmpMax) - Integer.valueOf(tmpMin));
+
+        }
+    }
 
     @Test
     public void k1() {
