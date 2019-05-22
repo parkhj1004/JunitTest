@@ -1,13 +1,107 @@
 /**
 * Created by we on 2018. 5. 9..
 */
-import java.util.*;
+
+import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class MatchTest {
 
     private static final Pattern pattern = Pattern.compile("(?:[&]?)(\\w+)=");
+
+    @Test
+    public void test() {
+
+        String temp = "where A.SUB_RESULT_SEQ = '$RSEQ$' and A.SUB_ECARE_NO = 37 and A.ECARE_NO = 32 and A.ERROR_CD in (250) and B.CLIENT = 'EC' and A.ECARE_NO = B.SERVICE_NO and A.RESULT_SEQ = B.RESULT_SEQ and A.LIST_SEQ = B.LIST_SEQ";
+
+//        temp = temp.toUpperCase().replaceAll( "\\Q\'$RSEQ$\'\\E", "0");
+        temp = temp.toUpperCase().replaceAll( "\\Q\'$RSEQ$\'\\E", "0").replaceAll("(?<=A.SUB_ECARE_NO)(.+?)(?=AND)" , "=0 ");
+
+        System.out.println(" temp :: " + temp);
+
+        String tempRegex = "(?<=A.SUB_ECARE_NO)(.+?)(?=AND)";
+
+        final Pattern pattern1 = Pattern.compile(tempRegex);
+        final Matcher matcher1 = pattern1.matcher(temp);
+
+        while (matcher1.find()) {
+            System.out.println("d     ; " + matcher1.group());
+        }
+
+
+        String defaultTemplate = "[{\"ordering\":1,\"name\":\"버튼1\",\"linkType\":\"WL\",\"linkTypeName\":\"웹링크\",\"linkMo\":\"#{모바일링크1}\",\"linkPc\":\"#{PC링크1}\",\"linkIos\":null,\"linkAnd\":null},{\"ordering\":2,\"name\":\"버튼2\",\"linkType\":\"WL\",\"linkTypeName\":\"웹링크\",\"linkMo\":\"#{모바일링크2}\",\"linkPc\":\"#{PC링크2}\",\"linkIos\":null,\"linkAnd\":null}]";
+        //    \Q#[{]\E((?:(?!\Q#[{]\E).)+)\Q[}]\E
+
+//        defaultTemplate  = "\"linkMo\":\"ddd#{모바일링크1}dddd";
+
+
+        String head = "#[{]";
+        String tail = "[}]";
+        String headToChange = "<%=(record.getString(\"";
+        String tailToChange = "\"))%>";
+
+        String headLiteral = "\\Q" + head + "\\E";
+        String tailLiteral = "\\Q" + tail + "\\E";
+        String variableRegex = headLiteral + "((?:(?!"  + headLiteral + ").)+)" + tailLiteral;
+
+//        variableRegex = "(?:[,]?)(#\\{(\\w+)}):";
+        variableRegex = "\\Q#[{]\\E((?:(?!\\Q#[{]\\E).)+)\\Q[}]\\E";
+        variableRegex = "(?<=#[{])(.+?)(?=[}])";
+
+
+        /**
+         * 전방탐색(lookahead)패턴은 일치 영역을 발견해도 그 값을 반환하지 않는 패턴을 말합니다.
+         * 전방탐색은 실제로는 하위 표현식이며, 하위 표현식과 같은 형식으로 작성됩니다. 전방탐색 패턴의 구문은 ?=로 시작하고 등호(=) 다음에 일치할 텍스트가 오는 하위 표현식입니다.
+         *
+         * 텍스트를 반환하기 전에 뒤쪽을 탐색하는 것은 후방탐색(lookbehind)이라고 합니다. 후방탐색 연산은 ?<=입니다.
+         * 기본적으로 후방탐색의 사용방법은 전방 탐색과 같습니다. 하위 표현식 안에서 사용하고 일치할 텍스트 앞에 옵니다.
+         *
+         * ?! 대소문자 무시
+         * ?: 그룹에 들어가지 않는다.
+         */
+
+//        String[] strs = defaultTemplate.split("(?<=\\})(?=\\#[{])");
+//        String[] strs = defaultTemplate.split(",");
+//        for (String s : strs) {
+//            System.out.println(s);
+//        }
+
+
+
+        String variableName = "";
+        String targetMethod = "";
+
+        final Pattern pattern = Pattern.compile(variableRegex);
+        final Matcher matcher = pattern.matcher(defaultTemplate);
+
+        while(matcher.find()) {
+
+//            System.out.println(matcher.group());
+//            System.out.println(matcher.group(0));
+            System.out.println(matcher.group(1));
+//            System.out.println(matcher.group(2));
+//
+            variableName = matcher.group(1);
+//            variableName = matcher.group(2);
+
+
+            StringBuilder sb = new StringBuilder();
+            sb.append(headToChange);
+            sb.append(variableName);
+            sb.append(tailToChange);
+            targetMethod = sb.toString();
+        }
+
+        System.out.println(targetMethod);
+    }
+
+
 
     public static void main(String... args) {
 

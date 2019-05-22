@@ -1,3 +1,7 @@
+import org.junit.jupiter.api.Test;
+
+import java.sql.Timestamp;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Calendar;
@@ -5,6 +9,33 @@ import java.util.Date;
 
 public class DateTest
 {
+
+    @Test
+    public void dataTest() throws ParseException {
+        Timestamp time = new Timestamp(System.currentTimeMillis());
+        //예약발송 설정시
+        //설정시간은 yyyyMMddhhmmss 형태 14자리로 와야함
+        String sendTime = "20190429110000";
+        if(sendTime != null && sendTime.length() == 14) {
+            int year = Integer.parseInt(sendTime.substring(0, 4)) - 1900;
+            int month = Integer.parseInt(sendTime.substring(4, 6)) - 1;
+            int day = Integer.parseInt(sendTime.substring(6, 8));
+            int hh = Integer.parseInt(sendTime.substring(8, 10));
+            int mm = Integer.parseInt(sendTime.substring(10, 12));
+            int ss = Integer.parseInt(sendTime.substring(12));
+            time = new Timestamp(year, month, day, hh, mm, ss, 0);
+        }
+
+        System.out.println(time);
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        System.out.println(simpleDateFormat.parse(sendTime));
+//        System.out.println(simpleDateFormat.format(simpleDateFormat.parse(sendTime)));
+
+
+
+    }
 
     public static void main (String args[])
     {
