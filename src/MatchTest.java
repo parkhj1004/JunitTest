@@ -39,10 +39,11 @@ public class MatchTest {
         //    \Q#[{]\E((?:(?!\Q#[{]\E).)+)\Q[}]\E
 
 //        defaultTemplate  = "\"linkMo\":\"ddd#{모바일링크1}dddd";
+//        defaultTemplate = "{#ddd}";
 
 
-        String head = "#[{]";
-        String tail = "[}]";
+        String head = "#{";
+        String tail = "}";
         String headToChange = "<%=(record.getString(\"";
         String tailToChange = "\"))%>";
 
@@ -51,8 +52,10 @@ public class MatchTest {
         String variableRegex = headLiteral + "((?:(?!"  + headLiteral + ").)+)" + tailLiteral;
 
 //        variableRegex = "(?:[,]?)(#\\{(\\w+)}):";
-        variableRegex = "\\Q#[{]\\E((?:(?!\\Q#[{]\\E).)+)\\Q[}]\\E";
-        variableRegex = "(?<=#[{])(.+?)(?=[}])";
+//        variableRegex = "\\Q#[{]\\E((?:(?!\\Q#[{]\\E).)+)\\Q[}]\\E";
+//        variableRegex = "(?<=#[{])(.+?)(?=[}])";
+        variableRegex = "(?<=\\Q#{\\E)(.+?)(?=\\Q}\\E)";
+//        variableRegex = "(?<=[{]#)(.+?)(?=})";
 
 
         /**
@@ -84,21 +87,21 @@ public class MatchTest {
 
 //            System.out.println(matcher.group());
 //            System.out.println(matcher.group(0));
-            System.out.println(matcher.group(1));
+            System.out.println("find : " + matcher.group(1));
 //            System.out.println(matcher.group(2));
 //
-            variableName = matcher.group(1);
+//            variableName = matcher.group(1);
 //            variableName = matcher.group(2);
 
 
-            StringBuilder sb = new StringBuilder();
-            sb.append(headToChange);
-            sb.append(variableName);
-            sb.append(tailToChange);
-            targetMethod = sb.toString();
+//            StringBuilder sb = new StringBuilder();
+//            sb.append(headToChange);
+//            sb.append(variableName);
+//            sb.append(tailToChange);
+//            targetMethod = sb.toString();
         }
 
-        System.out.println(targetMethod);
+//        System.out.println(targetMethod);
     }
 
 
