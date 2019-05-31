@@ -220,6 +220,56 @@ public class OneTest {
     }
 
     @Test
+    public void rotationTest3(){
+
+        int A[] = {3,2,1};
+        int K[] = {1,2,3,4};
+
+        int cnt = K.length;
+        int aCnt = A.length;
+        int result[] = new int[cnt];
+
+        int max = 0; // max 자리 구하기
+
+        for(int i = 0 ; i < cnt; i++)
+        {
+            result[i] = (max - (K[i]%aCnt));
+            result[i] = result[i] < 0 ? result[i] + aCnt : result[i];
+        }
+
+
+        for(int i : result) {
+            System.out.println(i);
+        }
+
+    }
+
+    @Test
+    public void rotationTest2(){
+
+        System.out.println(4%3);
+
+
+        int A[] = {3,8,9,7,6};
+        int K = 12;
+
+        int cnt = A.length;
+        int result[] = new int[cnt];
+
+        int jump = cnt > 0 ? K%cnt : 1;
+
+        for(int i = 0 ; i < A.length; i++) {
+            result[(i+jump) >= cnt ? (i+jump) - cnt : (i+jump)] = A[i];
+        }
+
+
+        for(int i : result) {
+            System.out.println(i);
+        }
+
+    }
+
+    @Test
     public void rotationTest(){
         int A[] = {3,8,9,7,6};
         int K = 12;
@@ -277,7 +327,11 @@ public class OneTest {
     @Test
     public void binaryTest2() {
 
-        int N = 561892;
+//        int N = 561892;
+        int N = 13;
+
+        System.out.println(Integer.toBinaryString(N));
+
         System.out.println(Stream
                 .of(
                         Integer.toBinaryString(N)
