@@ -39,7 +39,7 @@ public class MatchTest {
         //    \Q#[{]\E((?:(?!\Q#[{]\E).)+)\Q[}]\E
 
 //        defaultTemplate  = "\"linkMo\":\"ddd#{모바일링크1}dddd";
-//        defaultTemplate = "{#ddd}";
+        defaultTemplate = "#{ddd}";
 
 
         String head = "#{";
@@ -49,12 +49,15 @@ public class MatchTest {
 
         String headLiteral = "\\Q" + head + "\\E";
         String tailLiteral = "\\Q" + tail + "\\E";
-        String variableRegex = headLiteral + "((?:(?!"  + headLiteral + ").)+)" + tailLiteral;
+        String variableRegex = "(?<=\\Q" + head + "\\E)(.+?)(?=\\Q" + tail +"\\E)";
+        variableRegex = "(?<=\\Q" + head + "\\E)(.+?)(?=\\Q" + tail +"\\E)";
+//        String variableRegex = headLiteral + "((?:(?!"  + headLiteral + ").)+)" + tailLiteral;
 
 //        variableRegex = "(?:[,]?)(#\\{(\\w+)}):";
 //        variableRegex = "\\Q#[{]\\E((?:(?!\\Q#[{]\\E).)+)\\Q[}]\\E";
 //        variableRegex = "(?<=#[{])(.+?)(?=[}])";
-        variableRegex = "(?<=\\Q#{\\E)(.+?)(?=\\Q}\\E)";
+//        variableRegex = "(?<=\\Q#{\\E)(.+?)(?=\\Q}\\E)";
+        //               (?<=\Q#{\E)(.+?)(?=\Q}\E)
 //        variableRegex = "(?<=[{]#)(.+?)(?=})";
 
 

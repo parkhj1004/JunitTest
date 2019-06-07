@@ -66,7 +66,16 @@ public class RgpTest
             System.out.println("없음");
         }
 
+        Pattern p3 = Pattern.compile("([T|S])");
 
+        temp = "T,B,T,S,M,F,A,C,T";
+
+        String aaaa[] = (temp.replaceAll(",+[T|S]|[T|S],+" , "")).split(",");
+        System.out.println("dddd : " + aaaa.length);
+
+        for(String aaa : aaaa) {
+            System.out.println(aaa);
+        }
 
 
 
