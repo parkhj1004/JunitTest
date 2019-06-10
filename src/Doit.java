@@ -1,7 +1,32 @@
 import com.sun.tools.javac.util.StringUtils;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+
 public class Doit {
+
+    @Test
+    public void Chap1_16() {
+
+        int step = 4;
+        BigDecimal total = new BigDecimal(String.valueOf(step)).multiply(new BigDecimal("2")).subtract(new BigDecimal("1"));
+
+        int center = total.divide(
+                new BigDecimal("2") , 1 , BigDecimal.ROUND_CEILING).intValue();
+
+        System.out.println(center);
+
+        for(int i = 0; i < total.intValue(); i++) {
+
+            if(i != center) {
+                System.out.print(" ");
+            } else {
+                System.out.print("*");
+            }
+
+        }
+
+    }
 
     @Test
     public void Chap1_15() {
