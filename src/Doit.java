@@ -1,9 +1,143 @@
+import com.sun.tools.javac.util.StringUtils;
 import org.junit.jupiter.api.Test;
 
 public class Doit {
 
     @Test
+    public void Chap1_15() {
+        int num = 5;
+
+        System.out.println("왼쪽 아래가 직각인 이등변 삼각형을 출력합니다.");
+        System.out.printf("몇 단 삼각형입니까? : %d\n" , num);
+
+        for(int i = 0; i < num; i++) {
+            for(int j = num-i ; j >= 1; j--) {
+                System.out.printf("%s" , "*");
+            }
+            System.out.println();
+        }
+
+        System.out.println();
+        System.out.println();
+
+
+        for(int i = 0; i < num; i++) {
+            for(int k = 0; k < i; k++) {
+                System.out.printf("%s" , " ");
+            }
+            for(int j = 0; j < num -i; j++){
+                System.out.printf("%s" , "*");
+            }
+            System.out.println();
+        }
+
+
+        System.out.println();
+        System.out.println();
+
+        for(int i = 1; i <= num; i++) {
+            for(int j = 1; j <= i; j++){
+                System.out.printf("%s" , "*");
+            }
+            System.out.println();
+        }
+
+        System.out.println();
+        System.out.println();
+
+        for(int i = 1; i <= num; i++) {
+            for(int k = 0; k < num - i; k++) {
+                System.out.printf("%s" , " ");
+            }
+            for(int j = 1; j <= i; j++){
+                System.out.printf("%s" , "*");
+            }
+            System.out.println();
+        }
+    }
+
+    @Test
+    public void Chap1_14() {
+
+        int num = 5;
+
+        System.out.println("사격형을 출력합니다.");
+        System.out.printf("단 수 : %d\n" , num);
+
+        for(int i = 1; i <= num; i++) {
+            for(int j = 1; j <= num; j++){
+                System.out.printf("%s" , "*");
+            }
+            System.out.println();
+        }
+    }
+
+    @Test
+    public void Chap1_13() {
+
+        System.out.print("   |");
+        for(int i = 1;  i <= 9; i++) {
+            System.out.printf("%3d" , i);
+        }
+        System.out.println("\n---+---------------------------");
+
+        for(int i = 1; i <= 9; i++) {
+            System.out.printf("%2d|", i);
+            for(int j = 1; j <= 9; j++) {
+                System.out.printf("%3d" , i+j);
+            }
+            System.out.println();
+        }
+    }
+
+    @Test
+    public void Chap1_12() {
+
+        System.out.print("   |");
+        for(int i = 1; i <=9; i++)
+            System.out.printf("%3d" , i);
+        System.out.println("\n---+---------------------------");
+
+        for(int i = 1; i <= 9; i ++) {
+            System.out.printf("%2d |" , i);
+            for(int j = 1; j <= 9; j++) {
+                System.out.printf("%3d" , i * j);
+            }
+            System.out.println();
+        }
+    }
+
+    @Test
+    public void Chap1_11() {
+
+        int a = -100;
+
+        while(a < 0) {
+            System.out.println("양의 정수를 입력 하세요.");
+            a = 1358;
+        }
+
+        System.out.printf("그 수는 %d 자리 입니다." , String.valueOf(a).toCharArray().length);
+
+    }
+
+    @Test
     public void Chap1_10() {
+
+        int a = 6;
+        int b = 6;
+
+        do {
+
+            System.out.printf("a의 값:%d \n" , a);
+            System.out.printf("b의 갑:%d \n" , b);
+            System.out.printf("a보다 큰 값을 입력하세요!\n");
+
+            b = 8;
+        } while (a >= b);
+
+        System.out.printf("b 의 값:%d\n" , b);
+        System.out.printf("b - a는 %d 입니다.\n", b-a);
 
     }
 
