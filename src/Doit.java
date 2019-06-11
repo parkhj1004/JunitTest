@@ -1,8 +1,60 @@
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 
 public class Doit {
+
+    @Test
+    public void Chap2_4() {
+
+    }
+
+    @Test
+    public void Chap2_3() {
+        int arr[] = {5,10,73,2,-5,42};
+
+        System.out.println(Arrays.stream(arr).sum());
+    }
+
+    @Test
+    public void Chap2_2() {
+
+        int arr[] = {5,10,73,2,-5,42};
+
+        Chap2_2_print(arr);
+        Chap2_2_reverse(arr);
+    }
+
+    private void Chap2_2_reverse(int arr[]) {
+
+        int size = arr.length;
+        int center = size / 2;
+
+        int temp = -1;
+
+        for(int i = 0; i < center; i++) {
+
+            System.out.printf("a[%d]과(와) a[%d]를 교환합니다.\n" , i , size - (i+1));
+
+            temp = arr[i];
+            arr[i] = arr[size - (i+1)];
+            arr[size - (i+1)] = temp;
+
+            Chap2_2_print(arr);
+        }
+
+        System.out.println("역순 정렬을 마쳤습니다.");
+    }
+
+    private void Chap2_2_print(int arr[]) {
+
+        for(int tmp : arr) {
+            System.out.printf("%d " , tmp);
+        }
+
+        System.out.println();
+    }
 
 
 
