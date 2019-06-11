@@ -1,31 +1,66 @@
-import com.sun.tools.javac.util.StringUtils;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 
 public class Doit {
 
-    @Test
-    public void Chap1_16() {
 
-        int step = 4;
+
+
+    @Test
+    public void Chap1_17() {
+
+        int step = 8;
         BigDecimal total = new BigDecimal(String.valueOf(step)).multiply(new BigDecimal("2")).subtract(new BigDecimal("1"));
 
         int center = total.divide(
                 new BigDecimal("2") , 1 , BigDecimal.ROUND_CEILING).intValue();
 
-        System.out.println(center);
+        for(int i = 0; i < step; i++) {
+            for(int j = 0; j < total.intValue(); j++) {
 
-        for(int i = 0; i < total.intValue(); i++) {
-
-            if(i != center) {
-                System.out.print(" ");
-            } else {
-                System.out.print("*");
+                if(j >= center -i && j <= center+i ) {
+                    System.out.print(i+1);
+                } else {
+                    System.out.print(" ");
+                }
             }
+            System.out.println();
+        }
+    }
 
+    @Test
+    public void Chap1_16() {
+
+        int step = 8;
+        BigDecimal total = new BigDecimal(String.valueOf(step)).multiply(new BigDecimal("2")).subtract(new BigDecimal("1"));
+
+        int center = total.divide(
+                new BigDecimal("2") , 1 , BigDecimal.ROUND_CEILING).intValue();
+
+        for(int i = 0; i < step; i++) {
+            for(int j = 0; j < total.intValue(); j++) {
+
+                if(j >= center -i && j <= center+i ) {
+                    System.out.print("*");
+                } else {
+                    System.out.print(" ");
+                }
+            }
+            System.out.println();
         }
 
+        System.out.println();
+        System.out.println();
+
+        // 책
+        for (int i = 1; i <= step; i++) { 					// i행 (i = 1, 2, … ,n)
+            for (int j = 1; j <= step - i + 1; j++) 		// n-i+1개의 ' '를 나타냄
+                System.out.print(' ');
+            for (int j = 1; j <= (i - 1) * 2 + 1; j++) 	// (i-1)*2+1개의 '*'를 나타냄
+                System.out.print('*');
+            System.out.println(); 						// 개행(줄변환)
+        }
     }
 
     @Test
@@ -142,8 +177,15 @@ public class Doit {
             a = 1358;
         }
 
-        System.out.printf("그 수는 %d 자리 입니다." , String.valueOf(a).toCharArray().length);
+        System.out.printf("그 수는 %d 자리 입니다.\n" , String.valueOf(a).toCharArray().length);
 
+        // 책
+        int no = 0; 			// 자릿수
+        while (a > 0) {
+            a /= 10; 			// n을 10으로 나눔
+            no++;
+        }
+        System.out.println("그 수는 " + no + "자리입니다.");
     }
 
     @Test
@@ -167,30 +209,6 @@ public class Doit {
     }
 
     @Test
-    public void ForSum_7() {
-
-        int num = 7;
-        StringBuilder sb = new StringBuilder();
-        int sum = 0;
-
-        for(int i=1; i <= num; i++) {
-            sb.append(i);
-            sb.append("+");
-            sum += i;
-        }
-        System.out.println(sb.deleteCharAt(sb.length()-1).toString() + "=" + sum);
-    }
-
-    @Test
-    public void ForSum_8() {
-
-        int num = 2;
-        int sum = num * (1+num)/2;
-
-        System.out.println("sum ::" + sum);
-    }
-
-    @Test
     public void ForSum_9() {
 
         int startNum= 3;
@@ -201,13 +219,14 @@ public class Doit {
             throw new ArithmeticException("0 값이 올 수 없습니다.");
         }
 
+        System.out.println("a와 b를 포함하여 그 사이의 모든 정수의 합을 구합니다.");
+        System.out.printf("a의 값：%d\n" , startNum);
+        System.out.printf("b의 값：%d\n" , endNum);
+
         int totalSum = endNum * (endNum +1)/2;
         int beforeSum = startNum * (startNum-1)/2;
 
-        // mine
-        System.out.println(totalSum  + " , " + beforeSum);
-
-        System.out.println(totalSum - beforeSum);
+        System.out.printf("정수 a,b 사아의 모든 정수의 합은 %d 입니다. \n " , totalSum - beforeSum);
 
         // 마지막 수가 홀수 값이라면 저장
         int oddLastNum = 0;
@@ -225,4 +244,47 @@ public class Doit {
 
         System.out.println(result);
     }
+
+    @Test
+    public void ForSum_8() {
+
+        System.out.println("1부터 n까지의 합을 구합니다.");
+
+        int num = 11;
+        System.out.printf("n의 값：%d\n" , num);
+
+        int sum = num * (1+num)/2;
+
+        System.out.printf("1부터 %d 까지의 합은 %d 입니다",num, sum);
+    }
+
+    @Test
+    public void ForSum_7() {
+
+        int num = 7;
+        StringBuilder sb = new StringBuilder();
+        int sum = 0;
+
+        for(int i=1; i <= num; i++) {
+            sb.append(i);
+            sb.append(" + ");
+            sum += i;
+        }
+
+        System.out.println(sb.deleteCharAt(sb.lastIndexOf("+ ")).toString() + "= " + sum);
+    }
+
+    @Test
+    public void ForSum_6() {
+
+        int num = 9;
+        int sum = num * (1+num)/2;
+
+        System.out.println("sum ::" + sum);
+    }
+
+
+
+
+
 }
