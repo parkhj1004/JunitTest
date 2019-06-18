@@ -6,8 +6,38 @@ import java.util.Arrays;
 public class Doit {
 
     @Test
+    public void Chap2_6() {
+
+    }
+
+    @Test
+    public void Chap2_5() {
+        int arr[] = {5,10,73,2,-5,42};
+        int copy[] = {5,0,3,2,5,2};
+
+        int size = arr.length;
+
+        for(int i = 0; i < size; i++) {
+            copy[size- (i+1)] = arr[i];
+        }
+
+        for(int tmp : copy) {
+            System.out.println(tmp);
+        }
+    }
+
+    @Test
     public void Chap2_4() {
 
+        int arr[] = {5,10,73,2,-5,42};
+        int copy[] = {5,0,3,2,5,2};
+
+
+        copy = arr.clone();
+
+        for(int tmp : copy) {
+            System.out.println(tmp);
+        }
     }
 
     @Test
