@@ -8,8 +8,19 @@ public class RgpTest
     public static final String EXAMPLE_TEST = "This is my small example "
             + "string which I'm going to " + "use for pattern matching.";
 
+
     public static void main(String args[])
     {
+
+        String phoneNoStr = "01028614444";
+
+        String regEx = "(\\d{3})(\\d{3,4})(\\d{4})";
+        if(Pattern.matches(regEx, phoneNoStr)) {
+            phoneNoStr = phoneNoStr.replaceAll(regEx, "$1-$2-$3");
+        }
+
+        System.out.println(phoneNoStr);
+
         String ip1 = "127.0.0.1";
         String ip2 = "255.255.255.255";
         String ip3 = "255.255.255.256";

@@ -1,3 +1,5 @@
+import org.junit.jupiter.api.Test;
+
 import java.io.File;
 import java.math.BigDecimal;
 import java.security.MessageDigest;
@@ -19,6 +21,14 @@ public class BasicTest {
 
     public static final String EXAMPLE_TEST = "This is my small example "
             + "string which I'm going to " + "use for pattern matching.";
+
+    @Test
+    public void base64() {
+        Base64.Encoder enc2 = Base64.getMimeEncoder();
+
+        System.out.println(enc2.encodeToString("M&Wise:Abcd1234!".getBytes()));
+    }
+
 
 
     public static String makeHashData(StringBuffer sb) throws NoSuchAlgorithmException {

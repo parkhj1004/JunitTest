@@ -365,6 +365,54 @@ public class Doit {
         System.out.println("sum ::" + sum);
     }
 
+    /**
+     * 가우스 법칙
+     *  1 부터 n 까지의 합을 S라고 하고 아래와 같이 순서를 앞 뒤로 하여 두 번을 쓴 다음에
+     *
+     *         S = 1, 2, 3, … , n
+     *         S = n, n-1, n-2, … , 1
+     *         -------------------------
+     *         두 줄을 합치면..
+     *
+     *         2S = (n+1) + (n+1) + (n+1) + … + (n+1)
+     *         2S = (n+1) * n
+     *         가 되어
+     *         S = ((n+1) * n) / 2
+     *         로 식이 나옵니다.
+     */
+
+    /**
+     * 최대공약수
+     * m >=n 인 두 양의 정수 , m이 n의 배수이면 최대공약수(gcd)는 n 이고,
+     * 그렇지 않으면 gcd(m,n) = gcd(n , m%n) 이다
+     */
+    @Test
+    public void etc1 () {
+
+        int result = 0;
+
+        result = gcd(3,15);
+//        System.out.println(result);
+
+//        result = gcd(15,3);
+        System.out.println(result);
+
+//        System.out.println(3%15);
+//        System.out.println(15%3);
+
+    }
+
+    private int gcd(int p, int q) {
+
+        System.out.printf("p:%d , q:%d \n" , p,q);
+
+        if (q == 0) {
+            return p;
+        } else {
+            return gcd(q,p%q);
+        }
+    }
+
 
 
 
