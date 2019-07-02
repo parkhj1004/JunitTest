@@ -1,13 +1,44 @@
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+@RunWith(value=Parameterized.class)
 public class Algorithms {
+
+    private int first;
+    private int second;
+    private int result;
+
+    @Parameterized.Parameters
+    public static Collection<int[]> input() {
+        return Arrays.asList(new int[][] { {1,2,3} , {11,22,33} , {111,222,333}});
+    }
+
+    public  Algorithms(int first , int second , int result) {
+
+        this.first = first;
+        this.second = second;
+        this.result = result;
+    }
+
+
+    @Test
+    public void testParameter() {
+
+        assertEquals(result , (first+second) , 0);
+
+    }
+
 
     @Test
     public void binaryTest() {
