@@ -8,7 +8,44 @@ public class Doit {
     @Test
     public void Chap2_6() {
 
-    }
+        int input_num = 59;
+        int input = 2;
+        int idx = 0;
+
+        String c = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String result = "";
+        StringBuilder sb = new StringBuilder();
+
+        System.out.println(Integer.toBinaryString(input_num));
+
+        System.out.println("10진수를 기수 변환합니다.");
+
+        do {
+            System.out.printf("변환하는 음이 아닌 정수 %d\n" , input_num);
+        } while(input_num < 0);
+
+        do {
+            System.out.printf("어떤 진수로 변환할까요?(2-36)%d\n" , input);
+        } while (input < 2 || input > 36);
+
+        System.out.printf("%d|    %d\n" , input , input_num);
+        do {
+
+            System.out.println("  + -------");
+            result = String.valueOf(c.charAt(input_num % input));
+
+            input_num /= input;
+            if(input_num != 0) {
+                System.out.printf("%d|" ,input);
+            }
+            System.out.printf("       %d...%s\n" , input_num , result);
+
+            sb.append(result);
+
+        } while(input_num != 0);
+
+        System.out.printf("\n%d 진수로 %s 입니다." , input , sb.reverse().toString());
+   }
 
     @Test
     public void Chap2_5() {
