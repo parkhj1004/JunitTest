@@ -19,6 +19,34 @@ import java.util.stream.Stream;
 */
 public class BasicTest {
 
+    @Test
+    public void test() {
+        String gatewaySubInfo = "127.0.0.1:2222,1.1.1.1:4444";
+        String[] gatewaySubInfoArr = gatewaySubInfo.split(",");
+
+        System.out.println(gatewaySubInfoArr.length);
+        System.out.println(gatewaySubInfoArr[0]);
+
+
+
+        for(String gatewayInfo : gatewaySubInfoArr) {
+            if (gatewayInfo.indexOf(':') == -1) {
+                continue;
+            }
+
+            String[] ipPortStr = gatewayInfo.split(":");
+
+            HashMap<String, String> map = new HashMap<>();
+
+            map.put("ip", ipPortStr[0]);
+            map.put("port", ipPortStr[1]);
+
+            System.out.println(map.toString());
+        }
+
+
+    }
+
     public static final String EXAMPLE_TEST = "This is my small example "
             + "string which I'm going to " + "use for pattern matching.";
 

@@ -1,9 +1,56 @@
+import org.junit.jupiter.api.Test;
+
 import java.math.BigDecimal;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class RgpTest
 {
+
+
+
+    @Test
+    public void check_0709() {
+
+        String test1 = "<%def record = context.get(  \"record\"  ) %>";
+        String test2 = "<%com.mnwise.ASE.agent.util.TextReader def record=context.get(\"record\") %> ddfdfdfdf";
+        String test3 ="<%com.mnwise.ASE.agent.util.TextReader record=context.get(\"record\")%>d<br />d<br />d<br />d<br />ddddddd<br />ㄸㄸㄸㄸ<br />44444444<br />555555555\n" +
+                "<div>88888888</div>";
+
+        String regEx = "^<%\\s*(\\Qcom.mnwise.ASE.agent.util.TextReader\\E)?\\s*.*(\\Qrecord\\E)\\s*=\\s*(\\Qcontext.get\\E)\\s*(\\Q(\\E)\\s*.*(\\Qrecord\\E)\\s*.*(\\Q)\\E)\\s*(\\Q%>\\E)\\s*.*";
+
+
+        Pattern pattern1 = Pattern.compile(regEx);
+        Matcher matcher1 = pattern1.matcher(test1);
+
+        while (matcher1.find()) {
+            System.out.println(" 탐색 1 " + matcher1.group());
+        }
+
+        matcher1 = pattern1.matcher(test2);
+
+        while (matcher1.find()) {
+            System.out.println(" 탐색 2 " + matcher1.group());
+        }
+
+        matcher1 = pattern1.matcher(test3);
+
+        while (matcher1.find()) {
+            System.out.println(" 탐색 3 " + matcher1.group());
+        }
+
+
+
+        if(Pattern.matches(regEx, test1)) {
+            System.out.println("test1 OK");
+        }
+
+        if(Pattern.matches(regEx, test2)) {
+            System.out.println("test2 OK");
+        }
+
+
+    }
 
     public static final String EXAMPLE_TEST = "This is my small example "
             + "string which I'm going to " + "use for pattern matching.";

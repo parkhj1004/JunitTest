@@ -16,19 +16,115 @@ public class MatchTest {
     private static final Pattern pattern = Pattern.compile("(?:[&]?)(\\w+)=");
 
     @Test
+    public void testd() {
+
+        String test = "444444-44444";
+
+        //(\d{5}).-(?(1)\1|\d{1})
+
+        String regEx = "(\\d{5}).-($1|\\d{1})";
+
+        Pattern pattern1 = Pattern.compile(regEx);
+        Matcher matcher1 = pattern1.matcher(test);
+
+        while (matcher1.find()) {
+            System.out.println(" 탐색 1 " + matcher1.group());
+        }
+
+    }
+    /**
+     * 후방탐색
+     */
+    @Test
+    public void lookbehind() {
+        String test = "https://www.google.com";
+        String tempRegex = "(?<=\\/\\/).*\\.";
+
+        Pattern pattern1 = Pattern.compile(tempRegex);
+        Matcher matcher1 = pattern1.matcher(test);
+
+        while (matcher1.find()) {
+            System.out.println(" 후방탐색 1 " + matcher1.group());
+        }
+
+    }
+
+    /**
+     * 전방탐색(lookahead)패턴은 일치 영역을 발견해도 그 값을 반환하지 않는 패턴을 말합니다.
+     * 해당 단어를 제외한 앞의 문자열을 패턴매칭한다.
+     */
+    @Test
+    public void lookahead() {
+        String test = "https://www.google.com";
+        String tempRegex = "";
+
+        /** negative **/
+        tempRegex = "http[s]*.\\/\\/(?!google)";
+        //http[s]*.\/\/(?!google)
+
+        /** positive **/
+//        tempRegex = ".+(?=:)";
+
+        Pattern pattern1 = Pattern.compile(tempRegex);
+        Matcher matcher1 = pattern1.matcher(test);
+
+        while (matcher1.find()) {
+            System.out.println(" 전방탐색 1 " + matcher1.group());
+        }
+
+        tempRegex = "w.*(?=google)";
+
+        pattern1 = Pattern.compile(tempRegex);
+        matcher1 = pattern1.matcher(test);
+
+        while (matcher1.find()) {
+            System.out.println(" 전방탐색 2 " + matcher1.group());
+        }
+
+        tempRegex = "w.*(?=google)...";
+
+        pattern1 = Pattern.compile(tempRegex);
+        matcher1 = pattern1.matcher(test);
+
+        while (matcher1.find()) {
+            System.out.println(" 전방탐색 3 " + matcher1.group());
+        }
+
+        tempRegex = ".*(?=google).*";
+        tempRegex = "(?=.*google).*";
+
+        pattern1 = Pattern.compile(tempRegex);
+        matcher1 = pattern1.matcher(test);
+
+        while (matcher1.find()) {
+            System.out.println(" 전방탐색 4 " + matcher1.group());
+        }
+
+        tempRegex = "(?=.*google)(?=http)..";
+        tempRegex = "(?=.*google)(?=http[s]*).*";
+
+        pattern1 = Pattern.compile(tempRegex);
+        matcher1 = pattern1.matcher(test);
+
+        while (matcher1.find()) {
+            System.out.println(" 전방탐색 5 " + matcher1.group(0));
+        }
+    }
+
+    @Test
     public void test() {
 
         String temp = "where A.SUB_RESULT_SEQ = '$RSEQ$' and A.SUB_ECARE_NO = 37 and A.ECARE_NO = 32 and A.ERROR_CD in (250) and B.CLIENT = 'EC' and A.ECARE_NO = B.SERVICE_NO and A.RESULT_SEQ = B.RESULT_SEQ and A.LIST_SEQ = B.LIST_SEQ";
 
 //        temp = temp.toUpperCase().replaceAll( "\\Q\'$RSEQ$\'\\E", "0");
-        temp = temp.toUpperCase().replaceAll( "\\Q\'$RSEQ$\'\\E", "0").replaceAll("(?<=A.SUB_ECARE_NO)(.+?)(?=AND)" , "=0 ");
+//        temp = temp.toUpperCase().replaceAll( "\\Q\'$RSEQ$\'\\E", "0").replaceAll("(?<=A.SUB_ECARE_NO)(.+?)(?=AND)" , "=0 ");
 
-        System.out.println(" temp :: " + temp);
+//        System.out.println(" temp :: " + temp);
 
         String tempRegex = "(?<=A.SUB_ECARE_NO)(.+?)(?=AND)";
 
         final Pattern pattern1 = Pattern.compile(tempRegex);
-        final Matcher matcher1 = pattern1.matcher(temp);
+        final Matcher matcher1 = pattern1.matcher(temp.toUpperCase());
 
         while (matcher1.find()) {
             System.out.println("d     ; " + matcher1.group());
