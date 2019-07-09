@@ -3,6 +3,34 @@ import org.junit.jupiter.api.Test;
 public class DoitEx {
 
     @Test
+    public void ex2_10() {
+
+    }
+
+    @Test
+    public void ex2_9() {
+
+        int count = 0;
+        int j;
+
+        for(int i = 2; i <= 1000; i++) {
+            for(j = 2; j < i ; j++) {
+                count++;
+
+                if(i%j == 0) {
+                    break;
+                }
+            }
+
+            if(i == j) {
+                System.out.println(i);
+            }
+        }
+
+        System.out.printf("나눗셈을 수행한 횟수 : %d" , count);
+    }
+
+    @Test
     public void ex2_8_B() {
 
         int num = 59;
