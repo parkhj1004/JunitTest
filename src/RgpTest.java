@@ -7,6 +7,15 @@ import java.util.regex.Pattern;
 public class RgpTest
 {
 
+    @Test
+    public void check_0711() {
+        String test = "parkhyojinpark";
+        String regEx = "(p|a|r|k|a|b|c){4}hyojin$1";
+
+        if(Pattern.matches(regEx, test)) {
+            System.out.println("test1 OK");
+        }
+    }
 
 
     @Test
@@ -17,7 +26,7 @@ public class RgpTest
         String test3 ="<%com.mnwise.ASE.agent.util.TextReader record=context.get(\"record\")%>d<br />d<br />d<br />d<br />ddddddd<br />ㄸㄸㄸㄸ<br />44444444<br />555555555\n" +
                 "<div>88888888</div>";
 
-        String regEx = "^<%\\s*(\\Qcom.mnwise.ASE.agent.util.TextReader\\E)?\\s*.*(\\Qrecord\\E)\\s*=\\s*(\\Qcontext.get\\E)\\s*(\\Q(\\E)\\s*.*(\\Qrecord\\E)\\s*.*(\\Q)\\E)\\s*(\\Q%>\\E)\\s*.*";
+        String regEx = "(?s)^<%\\s*(\\Qcom.mnwise.ASE.agent.util.TextReader\\E)?\\s*.*(\\Qrecord\\E)\\s*=\\s*(\\Qcontext.get\\E)\\s*(\\Q(\\E)\\s*.*(\\Qrecord\\E)\\s*.*(\\Q)\\E)\\s*(\\Q%>\\E)\\s*.*";
 
 
         Pattern pattern1 = Pattern.compile(regEx);
