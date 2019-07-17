@@ -2,9 +2,31 @@ import org.junit.jupiter.api.Test;
 
 public class DoitEx {
 
+
+
     @Test
     public void ex2_10() {
+        int count = 0;
+        int ptr = 0;
+        int j = 0;
+        int[] prime = new int[500];
 
+        prime[ptr++] = 2;
+
+        for(int n=3; n <= 1000; n+=2) {
+            for(j =1; j <ptr; j++) {
+                count++;
+
+                if(n%prime[j] == 0) {
+                    break;
+                }
+            }
+            if(ptr == j) {
+                prime[ptr++] = n;
+            }
+        }
+
+        System.out.printf("나눗셈을 수행한 횟수 : %d" , count);
     }
 
     @Test
