@@ -116,6 +116,7 @@ public class MatchTest {
 
         String temp = "where A.SUB_RESULT_SEQ = '$RSEQ$' and A.SUB_ECARE_NO = 37 and A.ECARE_NO = 32 and A.ERROR_CD in (250) and B.CLIENT = 'EC' and A.ECARE_NO = B.SERVICE_NO and A.RESULT_SEQ = B.RESULT_SEQ and A.LIST_SEQ = B.LIST_SEQ";
 
+        temp = "{#내역[\" + i + \"].날짜#}";
 //        temp = temp.toUpperCase().replaceAll( "\\Q\'$RSEQ$\'\\E", "0");
 //        temp = temp.toUpperCase().replaceAll( "\\Q\'$RSEQ$\'\\E", "0").replaceAll("(?<=A.SUB_ECARE_NO)(.+?)(?=AND)" , "=0 ");
 
@@ -134,12 +135,12 @@ public class MatchTest {
         String defaultTemplate = "[{\"ordering\":1,\"name\":\"버튼1\",\"linkType\":\"WL\",\"linkTypeName\":\"웹링크\",\"linkMo\":\"#{모바일링크1}\",\"linkPc\":\"#{PC링크1}\",\"linkIos\":null,\"linkAnd\":null},{\"ordering\":2,\"name\":\"버튼2\",\"linkType\":\"WL\",\"linkTypeName\":\"웹링크\",\"linkMo\":\"#{모바일링크2}\",\"linkPc\":\"#{PC링크2}\",\"linkIos\":null,\"linkAnd\":null}]";
         //    \Q#[{]\E((?:(?!\Q#[{]\E).)+)\Q[}]\E
 
-//        defaultTemplate  = "\"linkMo\":\"ddd#{모바일링크1}dddd";
-        defaultTemplate = "#{ddd}";
+//        defaultTemplate  = "\"linkMo\":\"ddd{#모바일링크1#}dddd";
+        defaultTemplate = "{#내역[\" + i + \"].날짜#}";
 
 
-        String head = "#{";
-        String tail = "}";
+        String head = "{#";
+        String tail = "#}";
         String headToChange = "<%=(record.getString(\"";
         String tailToChange = "\"))%>";
 
@@ -189,18 +190,30 @@ public class MatchTest {
             System.out.println("find : " + matcher.group(1));
 //            System.out.println(matcher.group(2));
 //
-//            variableName = matcher.group(1);
+            variableName = matcher.group(1);
 //            variableName = matcher.group(2);
 
 
-//            StringBuilder sb = new StringBuilder();
-//            sb.append(headToChange);
-//            sb.append(variableName);
-//            sb.append(tailToChange);
-//            targetMethod = sb.toString();
+            StringBuilder sb = new StringBuilder();
+            sb.append(headToChange);
+            sb.append(variableName);
+            sb.append(tailToChange);
+            targetMethod = sb.toString();
         }
 
-//        System.out.println(targetMethod);
+        System.out.println();
+        System.out.println("입력 값 : " +  defaultTemplate);
+        System.out.println("찾은 값 : " +  variableName);
+        System.out.println("치환할 값 1 : " + headLiteral +  variableName + tailLiteral);
+        System.out.println("치환할 값 2 : " + "\\Q" + head  + variableName + tail  +"\\E");
+        System.out.println("치환 전 : " + defaultTemplate);
+        System.out.println("targetMethod : " + targetMethod);
+
+
+//        defaultTemplate = defaultTemplate.replaceAll(headLiteral + variableName + tailLiteral , targetMethod);
+        defaultTemplate = defaultTemplate.replaceAll("\\Q" + head  + variableName + tail  +"\\E" , targetMethod);
+
+        System.out.println("치환 후 " + defaultTemplate);
     }
 
 
