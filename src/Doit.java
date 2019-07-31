@@ -6,6 +6,60 @@ import java.util.Arrays;
 public class Doit {
 
     @Test
+    public void Char2_9() {
+
+        int [][] mdays = {
+                {31,28,31,30,31,30,31,31,30,31,30,31}, // 평년
+                {31,29,31,30,31,30,31,31,30,31,30,31}  // 운년
+        };
+
+        int year = 2019;
+        int month = 11;
+        int day = 30;
+
+        int iYear = DoitEx.isLeap(year);
+        int result = 0;
+
+        for(int i = month-1; i < mdays[iYear].length; i++) {
+            result += mdays[iYear][i];
+        }
+
+        System.out.println(result - day);
+    }
+
+    @Test
+    public void Char2_8() {
+
+        int [][] mdays = {
+                {31,28,31,30,31,30,31,31,30,31,30,31}, // 평년
+                {31,29,31,30,31,30,31,31,30,31,30,31}  // 운년
+        };
+
+        int year = 2019;
+        int month =  3;
+        int day = 15;
+
+        System.out.println("그 해 경과 일 수를 구합니다.");
+        System.out.printf("년 : %d\n" , year);
+        System.out.printf("월 : %d\n" , month);
+        System.out.printf("일 : %d\n" , day);
+
+        int result = 0;
+        int iYear = DoitEx.isLeap(year);
+
+        int i = 0;
+
+        while(i < month -1) {
+            result += mdays[iYear][i++];
+        }
+
+        result = result + day;
+
+        System.out.printf("그 해 %d일째 입니다.\n" , result);
+
+    }
+
+    @Test
     public void Chap2_6() {
 
         int input_num = 59;
