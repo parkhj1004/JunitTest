@@ -85,35 +85,27 @@ public class DoitEx {
 
     @Test
     public void ex2_10() {
-
         int count = 0;
         int ptr = 0;
+        int j = 0;
         int[] prime = new int[500];
 
         prime[ptr++] = 2;
 
-        for(int n = 3; n <= 1000 ; n += 2) {
-            int i;
-            for(i = 1; i < ptr; i++) {
+        for(int n=3; n <= 1000; n+=2) {
+            for(j =1; j <ptr; j++) {
                 count++;
 
-                if (n % prime[i] == 0) {
+                if(n%prime[j] == 0) {
                     break;
                 }
             }
-
-            if(ptr == i) {
+            if(ptr == j) {
                 prime[ptr++] = n;
             }
         }
 
-        for(int p : prime) {
-            System.out.println(p);
-        }
-
-        System.out.printf("나눗셈을 수행한 횟수 : %d\n" , count);
-
-
+        System.out.printf("나눗셈을 수행한 횟수 : %d" , count);
     }
 
     @Test
