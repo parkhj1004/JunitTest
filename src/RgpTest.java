@@ -8,6 +8,34 @@ public class RgpTest
 {
 
     @Test
+    public void check_phone() {
+//        String test = "001-10-2-8-6-14749";
+        String test = " + 11   10-2-8-6-14749";
+        test = test.replaceAll("[^(^+|0-9)]" , "");
+
+        System.out.println(test);
+
+//        String regEx = "^(001|\\+82){1}[0-9](?:[- ]?[0-9]){0,14}$";
+        String regEx = "^(01|001|\\+82|82){1}[0-9](?:[- ]?[0-9]){0,14}$";
+
+        //^(00|\+){1}
+
+        if(Pattern.matches(regEx, test)) {
+            System.out.println("test1 OK");
+        } else {
+            System.out.println("false");
+        }
+
+        Pattern pattern1 = Pattern.compile(regEx);
+        Matcher matcher1 = pattern1.matcher(test);
+
+        while (matcher1.find()) {
+            System.out.println(" 탐색 0 " + matcher1.group(0));
+            System.out.println(" 탐색 1 " + matcher1.group(1));
+        }
+    }
+
+    @Test
     public void check_0711() {
         String test = "parkhyojinpark";
         String regEx = "(p|a|r|k|a|b|c){4}hyojin$1";
