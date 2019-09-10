@@ -1,6 +1,66 @@
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 public class DoitEx {
+
+    @Test
+    public void ex2_14() {
+
+        Phy[] phy = {
+                new Phy("A" , 162 , 0.3),
+                new Phy("AA" , 162 , 0.3),
+                new Phy("B" , 173 , 0.7),
+                new Phy("C" , 175 , 2.0),
+                new Phy("D" , 171 , 1.5),
+                new Phy("E" , 168 , 0.4),
+                new Phy("F" , 174 , 1.2),
+                new Phy("G" , 169 , 0.8),
+        };
+
+        System.out.printf("평균키는 %5.1fcm\n" , aveHeight(phy));
+
+        int dist[] = new int[Phy.iMax];
+
+        System.out.println("시력 분포");
+        distVision(phy , dist);
+        for(int i = 0; i < Phy.iMax; i++) {
+//            System.out.printf("%3.1f ~ : %2d 명\n" , i / 10.0 ,  dist[i]);
+            System.out.printf("%3.1f ~ : %s\n" , i / 10.0 ,  new String(new char[dist[i]]).replace("\0", "*"));
+        }
+    }
+    public double aveHeight(Phy[] data) {
+
+        double sum = 0;
+
+        sum = Arrays.asList(data).stream().mapToDouble(x -> x.height).sum();
+
+        return !Objects.isNull(data) && data.length > 0 ?  sum / data.length : 0;
+    }
+
+    public void distVision(Phy[] data , int[] dist) {
+
+        for(Phy d : data) {
+            dist[(int) (d.vision * 10)]++;
+        }
+
+    }
+
+    public class Phy {
+        static final int iMax = 21;
+        private String name;
+        private int height;
+        private double vision;
+
+        Phy(String name, int height , double vision) {
+            this.name = name;
+            this.height = height;
+            this.vision = vision;
+        }
+    }
+
+
 
     @Test
     public void ex2_13() {
