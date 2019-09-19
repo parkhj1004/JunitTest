@@ -6,6 +6,22 @@ import java.util.Objects;
 public class DoitEx {
 
     @Test
+    public void ex3_1() {
+
+        int in = 7;
+        int[] array = new int[in];
+
+        for(int i = 0; i < in; i++) {
+            array[i] = 11 * i;
+        }
+
+
+        System.out.printf("요솟수 : %d\n" , in);
+
+
+    }
+
+    @Test
     public void ex2_14() {
 
         Phy[] phy = {
