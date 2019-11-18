@@ -19,10 +19,5 @@ public class TestMain {
         t.call(new CouponCacheServiceBImpl());
         t.call(new ProdCacheServiceImpl());
 
-
-//        CacheService cacheService = new CouponCacheServiceBImpl();
-//
-//        cacheService.test();
-
     }
 }
