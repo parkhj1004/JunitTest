@@ -1,7 +1,6 @@
-import org.junit.jupiter.api.Test;
-
 import java.util.Arrays;
 import java.util.Objects;
+import org.junit.Test;
 
 public class DoitEx {
 
