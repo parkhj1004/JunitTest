@@ -6,18 +6,39 @@ public class DoitEx {
 
     @Test
     public void ex3_1() {
-
         int in = 7;
-        int[] array = new int[in];
+        int[] array = {6,4,3,2,1,9,8};
 
+        int find = 3;
+
+        System.out.printf("   |");
         for(int i = 0; i < in; i++) {
-            array[i] = 11 * i;
+            System.out.printf(" %d " , i );
         }
 
+        System.out.println("\n---+---------------------");
 
-        System.out.printf("요솟수 : %d\n" , in);
+        for(int i = 0; i < in; i++) {
+            System.out.print("   |");
+            for(int j = 0; j < in; j++) {
+                if(i == j) {
+                    System.out.printf(" *");
+                } else {
+                    System.out.printf("   ");
+                }
+            }
+            System.out.println();
+            System.out.printf( "%d  |" , i);
+            for(int k = 0; k < in; k++) {
+                System.out.printf(" %d " , array[k]);
+            }
+            System.out.println();
 
-
+            if(array[i] == find) {
+                System.out.printf("%d은 array[%d]에 있습니다. " , find , i);
+                break;
+            }
+        }
     }
 
     @Test
