@@ -1,10 +1,16 @@
-import org.junit.jupiter.api.Test;
-
 import java.io.File;
 import java.math.BigDecimal;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -12,12 +18,147 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import org.junit.Test;
 
 
 /**
 * Created by we on 2017. 12. 12..
 */
 public class BasicTest {
+
+    @Test
+    public void shortenTeset() {
+        //HashMap to store the longUrl and the randomly generated string
+        HashMap<String,String> urlMap = new HashMap<>();
+
+        String longUrl = "http://www.ddd.com";
+
+        // Encodes a URL to a shortened URL.
+//        public String encode(String longUrl) {
+            Random rand = new Random();
+            int urlLen = 8;
+            char [] shortURL = new char[urlLen];
+            String randChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
+
+            for(int i = 0; i < urlLen; i++ )
+                shortURL[i] = randChars.charAt(rand.nextInt(randChars.length()));
+
+            StringBuilder sb = new StringBuilder("http://localhost/");
+            sb.append(new String(shortURL));
+            System.out.println(sb);
+
+            urlMap.put(sb.toString(),longUrl);
+
+            System.out.println(urlMap.toString());
+
+//            return sb.toString();
+
+//        }
+    }
+
+    // Decodes a shortened URL to its original URL.
+//    public String decode(String shortUrl) {
+//
+//        return urlMap.get(shortUrl);
+//
+//    }
+
+    @Test
+    public void encryt() throws Exception{
+        String md2 = getHash("test", "md2");
+        String md5 = getHash("test", "md5");
+        String sha1 = getHash("test", "sha1");
+        String sha256 = getHash("test", "sha-256");
+        String sha384 = getHash("test", "sha-384");
+        String sha512 = getHash("test", "sha-512");
+//        String crc32 = getHash("test", "CRC32");
+
+        // “MD2″, “MD5″, “SHA1″, “SHA-256″, “SHA-384″, “SHA-512″
+        System.out.println("MD2     : [" + md2 + "](" + md2.length() + ")");
+        System.out.println("MD5     : [" + md5 + "](" + md5.length() + ")");
+        System.out.println("SHA1    : [" + sha1 + "](" + sha1.length() + ")");
+        System.out.println("SHA-256 : [" + sha256 + "](" + sha256.length() + ")");
+        System.out.println("SHA-384 : [" + sha384 + "](" + sha384.length() + ")");
+        System.out.println("SHA-512 : [" + sha512 + "](" + sha512.length() + ")");
+//        System.out.println("CRC32 : [" + crc32 + "](" + crc32.length() + ")");
+    }
+
+    public static String getHash(String message, String algorithm)
+            throws NoSuchAlgorithmException {
+
+        try {
+            byte[] buffer = message.getBytes();
+            MessageDigest md = MessageDigest.getInstance(algorithm);
+            md.update(buffer);
+            byte[] digest = md.digest();
+            StringBuilder hex = new StringBuilder();
+
+            for(int i = 0 ; i < digest.length ; i++) {
+                int b = digest[i] & 0xff;
+                if (Integer.toHexString(b).length() == 1) hex.append("0");
+                hex.append(Integer.toHexString(b));
+            }
+
+            return hex.toString();
+        } catch(NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    @Test
+    public void shorten() {
+        int n = 12345;
+        String shorturl = idToShortURL(n);
+        System.out.println("Generated short url is " + shorturl);
+        System.out.println("Id from url is " +
+                shortURLtoID(shorturl));
+    }
+
+    // Function to generate a short url from integer ID
+    static String idToShortURL(int n)
+    {
+        // Map to store 62 possible characters
+        char map[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray();
+
+        StringBuffer shorturl = new StringBuffer();
+
+        // Convert given integer id to a base 62 number
+        while (n > 0)
+        {
+            // use above map to store actual character
+            // in short url
+            shorturl.append(map[n % 62]);
+            n = n / 62;
+        }
+
+        // Reverse shortURL to complete base conversion
+        return shorturl.reverse().toString();
+    }
+
+    // Function to get integer ID back from a short url
+    static int shortURLtoID(String shortURL)
+    {
+        int id = 0; // initialize result
+
+        // A simple base conversion logic
+        for (int i = 0; i < shortURL.length(); i++)
+        {
+            if ('a' <= shortURL.charAt(i) &&
+                    shortURL.charAt(i) <= 'z')
+                id = id * 62 + shortURL.charAt(i) - 'a';
+            if ('A' <= shortURL.charAt(i) &&
+                    shortURL.charAt(i) <= 'Z')
+                id = id * 62 + shortURL.charAt(i) - 'A' + 26;
+            if ('0' <= shortURL.charAt(i) &&
+                    shortURL.charAt(i) <= '9')
+                id = id * 62 + shortURL.charAt(i) - '0' + 52;
+        }
+
+        System.out.println("id ::: " + id);
+        return id;
+    }
 
     @Test
     public void test() {
